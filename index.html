@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Via Francigena à vélo — Calais → Châlons-en-Champagne</title>
+<title>Via Francigena à vélo — Calais → Saint-Martin-sur-le-Pré</title>
 <style>
   :root{
     --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
@@ -63,6 +63,15 @@
   .files{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
   .file{background:var(--surface);border:1px solid var(--border);border-radius:8px;
     padding:6px 10px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--ink2);}
+  .dlrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    padding:11px 0;border-bottom:1px solid var(--grid);}
+  .dlrow:last-child{border-bottom:none;}
+  .dlname{font-size:14.5px;color:var(--ink);}
+  .dllinks{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:13px;
+    padding:7px 13px;border-radius:999px;background:var(--series);color:#fff;font-weight:600;white-space:nowrap;}
+  .btn:hover{filter:brightness(1.06);}
+  .btn.ghost{background:transparent;color:var(--series);border:1px solid var(--series);font-weight:500;}
   @media(max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}h1{font-size:22px}}
   /* tooltip */
   .tt{position:fixed;pointer-events:none;background:var(--ink);color:var(--page);
@@ -75,13 +84,13 @@
   <header class="top">
     <div>
       <h1>Via Francigena à vélo 🚲</h1>
-      <p class="sub">Calais → Châlons-en-Champagne · vélo de route · petites routes peu fréquentées · via Verzy</p>
+      <p class="sub">Calais → Saint-Martin-sur-le-Pré · vélo de route · petites routes peu fréquentées · via Verzy</p>
     </div>
     <button class="toggle" id="tg">◐ Thème</button>
   </header>
 
   <div class="tiles">
-    <div class="tile"><div class="v">385 km</div><div class="l">Distance totale</div></div>
+    <div class="tile"><div class="v">384 km</div><div class="l">Distance totale</div></div>
     <div class="tile"><div class="v">~3 100 m</div><div class="l">Dénivelé + cumulé</div></div>
     <div class="tile"><div class="v">3 étapes</div><div class="l">≈ 128 km / jour</div></div>
     <div class="tile"><div class="v">~93 %</div><div class="l">Routes calmes</div></div>
@@ -92,19 +101,40 @@
     <tbody>
       <tr><td>1</td><td>Calais → Arras</td><td class="n">121 km</td><td class="n">≈ +1 155 m</td><td class="n">171 m</td></tr>
       <tr><td>2</td><td>Arras → Laon</td><td class="n">133 km</td><td class="n">≈ +765 m</td><td class="n">180 m</td></tr>
-      <tr><td>3</td><td>Laon → Reims → Verzy → Châlons</td><td class="n">131 km</td><td class="n">≈ +1 195 m</td><td class="n">263 m</td></tr>
+      <tr><td>3</td><td>Laon → Reims → Verzy → Saint-Martin-sur-le-Pré</td><td class="n">130 km</td><td class="n">≈ +1 195 m</td><td class="n">272 m</td></tr>
     </tbody>
   </table>
 
   <div id="cards"></div>
 
+  <div class="card" id="downloads">
+    <h2>Télécharger les traces GPX</h2>
+    <p class="route">Prêtes pour Garmin, Komoot, OsmAnd… Le lien « Modifier » ouvre l'éditeur BRouter avec l'étape préchargée, pour ajuster le tracé et ré-exporter.</p>
+    <div class="dlrow">
+      <span class="dlname">Étape 1 · Calais → Arras</span>
+      <span class="dllinks">
+        <a class="btn" href="etape1.gpx" download>⬇ GPX</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/50.6/2.3/standard&lonlats=1.8587,50.9513;1.9767,50.8556;2.2570,50.6377;2.7772,50.2910&profile=fastbike-lowtraffic" target="_blank" rel="noopener">✎ Modifier</a>
+      </span>
+    </div>
+    <div class="dlrow">
+      <span class="dlname">Étape 2 · Arras → Laon</span>
+      <span class="dllinks">
+        <a class="btn" href="etape2.gpx" download>⬇ GPX</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/50.0/3.2/standard&lonlats=2.7772,50.2910;2.8503,50.1030;2.9370,49.9310;3.2870,49.8489;3.6240,49.5641&profile=fastbike-lowtraffic" target="_blank" rel="noopener">✎ Modifier</a>
+      </span>
+    </div>
+    <div class="dlrow">
+      <span class="dlname">Étape 3 · Laon → Saint-Martin-sur-le-Pré</span>
+      <span class="dllinks">
+        <a class="btn" href="etape3.gpx" download>⬇ GPX</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/49.3/4.0/standard&lonlats=3.6240,49.5641;3.8213,49.4700;4.0347,49.2583;4.0146,49.1556;4.0986,49.1567;4.1536,49.1489;4.1700,49.1050;4.3539,48.9836&profile=fastbike-lowtraffic" target="_blank" rel="noopener">✎ Modifier</a>
+      </span>
+    </div>
+  </div>
+
   <div class="foot">
     <p>Tracé calculé avec <b>BRouter</b> (profil faible trafic durci : primaires/secondaires fortement pénalisées, relief non lissé). Exposition mesurée sur les tags OSM : <b>0,5 % primaire</b>, 6,2 % secondaire, le reste sur petites départementales, voies communales et voies vertes. Dénivelé issu du modèle d'altitude <b>SRTM</b> (± 10 % selon l'appli GPS).</p>
-    <div class="files">
-      <span class="file">VF_Etape1_Calais-Arras.gpx</span>
-      <span class="file">VF_Etape2_Arras-Laon.gpx</span>
-      <span class="file">VF_Etape3_Laon-Chalons-via-Verzy.gpx</span>
-    </div>
   </div>
 </div>
 
@@ -120,10 +150,10 @@ const STAGES = [
    km:133, dplus:764, min:52, max:180,
    climbs:[[110.1,8,"Laon"],[48.1,7.5,"Péronne"],[89.3,7,"St-Quentin"],[10,6.5,"Bapaume"]],
    el:[70,75,85,89,82,77,87,87,84,92,93,106,97,95,95,98,93,97,106,116,124,121,121,131,127,129,122,122,129,130,120,124,116,112,83,80,77,72,75,69,72,113,73,52,61,58,59,59,68,67,76,100,100,105,107,110,110,109,118,123,120,93,79,77,83,106,89,114,123,110,85,105,74,94,92,116,98,116,81,83,65,65,63,74,107,110,120,122,102,107,84,56,63,64,91,75,66,73,66,71,81,78,70,78,89,78,82,83,87,127,180]},
-  {n:3, title:"Étape 3 — Laon → Châlons via Verzy", route:"Corbeny · Reims · Montagne de Reims · Verzy · Louvois",
-   km:131, dplus:1195, min:52, max:263,
-   climbs:[[90.6,17.7,"Verzy"],[101,15.8,"Louvois"],[3,11.4,"Laon"],[65,10.5,"Reims"]],
-   el:[180,115,70,72,75,80,87,107,166,173,130,96,155,151,100,87,104,94,95,79,92,98,73,67,62,57,64,52,54,57,66,68,76,84,76,101,92,101,104,109,116,175,150,108,116,160,127,94,78,78,79,81,85,89,89,89,81,81,84,100,119,137,141,128,169,200,243,258,182,180,150,152,146,157,161,198,189,223,210,203,191,147,133,164,185,170,263,237,166,132,125,103,109,88,81,123,99,78,76,76,77,78,78,78,80,79,81,81,82,82,84]}
+  {n:3, title:"Étape 3 — Laon → Saint-Martin-sur-le-Pré via Verzy", route:"Corbeny · Reims · Montagne de Reims · Verzy · Louvois",
+   km:130, dplus:1195, min:53, max:272,
+   climbs:[[90.6,17.7,"Verzy"],[101,15.8,"Louvois"],[3,11.4,"Laon"]],
+   el:[180,115,71,72,75,80,86,106,163,172,141,87,146,155,100,87,111,100,94,87,95,96,86,68,63,57,62,54,53,57,69,63,70,85,74,92,98,100,104,102,134,147,188,123,99,142,139,104,81,76,80,80,82,84,87,93,80,79,84,93,101,126,147,124,136,183,183,267,236,199,170,147,144,160,167,170,208,217,222,212,200,185,136,141,173,177,182,272,244,162,132,121,109,111,88,83,123,97,77,76,76,77,78,78,78,80,79,81,81,87,104]}
 ];
 
 const NS="http://www.w3.org/2000/svg";
