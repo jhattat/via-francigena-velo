@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Via Francigena à vélo — Calais → Châlons-en-Champagne</title>
+<style>
+  :root{
+    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --series:#2a78d6; --series-fill:rgba(42,120,214,.14);
+    --climb:#eb6834; --border:rgba(11,11,11,.10); --good:#0ca30c;
+    color-scheme:light;
+  }
+  :root[data-theme="dark"]{
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --series:#3987e5; --series-fill:rgba(57,135,229,.20);
+    --climb:#d95926; --border:rgba(255,255,255,.10); --good:#0ca30c;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --axis:#383835; --series:#3987e5; --series-fill:rgba(57,135,229,.20);
+      --climb:#d95926; --border:rgba(255,255,255,.10);
+      color-scheme:dark;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 20px 64px;}
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em;}
+  .sub{color:var(--ink2);font-size:15px;margin:0;}
+  .toggle{border:1px solid var(--border);background:var(--surface);color:var(--ink2);
+    border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;white-space:nowrap;}
+  .toggle:hover{color:var(--ink);}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 8px;}
+  .tile{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;}
+  .tile .v{font-size:24px;font-weight:650;letter-spacing:-.01em;}
+  .tile .l{font-size:12.5px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.03em;}
+  table.sum{width:100%;border-collapse:collapse;margin:22px 0 6px;font-size:14.5px;}
+  table.sum th,table.sum td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--grid);}
+  table.sum th{color:var(--muted);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;}
+  table.sum td.n{font-variant-numeric:tabular-nums;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    padding:18px 18px 14px;margin-top:20px;}
+  .card h2{font-size:18px;margin:0 0 2px;}
+  .card .route{color:var(--ink2);font-size:14px;margin:0 0 12px;}
+  .stat-row{display:flex;flex-wrap:wrap;gap:18px;margin:0 0 6px;}
+  .stat-row .s{font-size:13.5px;color:var(--ink2);}
+  .stat-row .s b{color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums;}
+  .chart{width:100%;height:auto;display:block;touch-action:none;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--page);
+    border:1px solid var(--border);border-radius:999px;padding:5px 11px;font-size:12.5px;color:var(--ink2);}
+  .chip .dot{width:8px;height:8px;border-radius:2px;background:var(--climb);}
+  .chip b{color:var(--ink);font-variant-numeric:tabular-nums;}
+  .note{color:var(--muted);font-size:12.5px;margin-top:10px;}
+  .foot{margin-top:30px;border-top:1px solid var(--grid);padding-top:18px;color:var(--ink2);font-size:13.5px;}
+  .foot b{color:var(--ink);}
+  .files{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .file{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:6px 10px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--ink2);}
+  @media(max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}h1{font-size:22px}}
+  /* tooltip */
+  .tt{position:fixed;pointer-events:none;background:var(--ink);color:var(--page);
+    padding:6px 9px;border-radius:8px;font-size:12px;font-variant-numeric:tabular-nums;
+    opacity:0;transition:opacity .08s;z-index:10;white-space:nowrap;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Via Francigena à vélo 🚲</h1>
+      <p class="sub">Calais → Châlons-en-Champagne · vélo de route · petites routes peu fréquentées · via Verzy</p>
+    </div>
+    <button class="toggle" id="tg">◐ Thème</button>
+  </header>
+
+  <div class="tiles">
+    <div class="tile"><div class="v">385 km</div><div class="l">Distance totale</div></div>
+    <div class="tile"><div class="v">~3 100 m</div><div class="l">Dénivelé + cumulé</div></div>
+    <div class="tile"><div class="v">3 étapes</div><div class="l">≈ 128 km / jour</div></div>
+    <div class="tile"><div class="v">~93 %</div><div class="l">Routes calmes</div></div>
+  </div>
+
+  <table class="sum">
+    <thead><tr><th>Étape</th><th>Trajet</th><th>Distance</th><th>D+</th><th>Alt. max</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Calais → Arras</td><td class="n">121 km</td><td class="n">≈ +1 155 m</td><td class="n">171 m</td></tr>
+      <tr><td>2</td><td>Arras → Laon</td><td class="n">133 km</td><td class="n">≈ +765 m</td><td class="n">180 m</td></tr>
+      <tr><td>3</td><td>Laon → Reims → Verzy → Châlons</td><td class="n">131 km</td><td class="n">≈ +1 195 m</td><td class="n">263 m</td></tr>
+    </tbody>
+  </table>
+
+  <div id="cards"></div>
+
+  <div class="foot">
+    <p>Tracé calculé avec <b>BRouter</b> (profil faible trafic durci : primaires/secondaires fortement pénalisées, relief non lissé). Exposition mesurée sur les tags OSM : <b>0,5 % primaire</b>, 6,2 % secondaire, le reste sur petites départementales, voies communales et voies vertes. Dénivelé issu du modèle d'altitude <b>SRTM</b> (± 10 % selon l'appli GPS).</p>
+    <div class="files">
+      <span class="file">VF_Etape1_Calais-Arras.gpx</span>
+      <span class="file">VF_Etape2_Arras-Laon.gpx</span>
+      <span class="file">VF_Etape3_Laon-Chalons-via-Verzy.gpx</span>
+    </div>
+  </div>
+</div>
+
+<div class="tt" id="tt"></div>
+
+<script>
+const STAGES = [
+  {n:1, title:"Étape 1 — Calais → Arras", route:"Ardres · Thérouanne · collines de l'Artois",
+   km:121, dplus:1155, min:1, max:171,
+   climbs:[[24.4,12.5,"Ardres"],[64,11.6,"Thérouanne"],[36.4,11,"Thérouanne"],[89.2,10.5,"Arras"]],
+   el:[3,3,2,3,2,1,1,1,1,1,1,1,2,2,12,16,24,26,35,43,53,57,33,81,102,94,85,126,105,74,104,80,90,102,111,120,99,69,38,38,43,93,104,116,120,106,87,58,68,62,41,45,79,94,93,101,92,55,59,70,74,62,75,96,83,102,113,111,139,107,140,138,103,97,83,122,120,125,105,108,89,79,79,90,107,164,171,149,148,147,139,119,95,109,101,106,104,98,101,110,103,99,89,80,65,61,86,62,60,68,70]},
+  {n:2, title:"Étape 2 — Arras → Laon", route:"Bapaume · Péronne · Saint-Quentin · plateau du Cambrésis",
+   km:133, dplus:764, min:52, max:180,
+   climbs:[[110.1,8,"Laon"],[48.1,7.5,"Péronne"],[89.3,7,"St-Quentin"],[10,6.5,"Bapaume"]],
+   el:[70,75,85,89,82,77,87,87,84,92,93,106,97,95,95,98,93,97,106,116,124,121,121,131,127,129,122,122,129,130,120,124,116,112,83,80,77,72,75,69,72,113,73,52,61,58,59,59,68,67,76,100,100,105,107,110,110,109,118,123,120,93,79,77,83,106,89,114,123,110,85,105,74,94,92,116,98,116,81,83,65,65,63,74,107,110,120,122,102,107,84,56,63,64,91,75,66,73,66,71,81,78,70,78,89,78,82,83,87,127,180]},
+  {n:3, title:"Étape 3 — Laon → Châlons via Verzy", route:"Corbeny · Reims · Montagne de Reims · Verzy · Louvois",
+   km:131, dplus:1195, min:52, max:263,
+   climbs:[[90.6,17.7,"Verzy"],[101,15.8,"Louvois"],[3,11.4,"Laon"],[65,10.5,"Reims"]],
+   el:[180,115,70,72,75,80,87,107,166,173,130,96,155,151,100,87,104,94,95,79,92,98,73,67,62,57,64,52,54,57,66,68,76,84,76,101,92,101,104,109,116,175,150,108,116,160,127,94,78,78,79,81,85,89,89,89,81,81,84,100,119,137,141,128,169,200,243,258,182,180,150,152,146,157,161,198,189,223,210,203,191,147,133,164,185,170,263,237,166,132,125,103,109,88,81,123,99,78,76,76,77,78,78,78,80,79,81,81,82,82,84]}
+];
+
+const NS="http://www.w3.org/2000/svg";
+const W=880, H=250, ML=44, MR=16, MT=18, MB=34;
+const PW=W-ML-MR, PH=H-MT-MB;
+
+function el(tag,attrs){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
+function niceStep(range){const raw=range/4;const p=Math.pow(10,Math.floor(Math.log10(raw)));const n=raw/p;let s=n<1.5?1:n<3?2:n<7?5:10;return s*p;}
+
+function interp(arr,pos){const i=Math.floor(pos),f=pos-i;if(i>=arr.length-1)return arr[arr.length-1];return arr[i]*(1-f)+arr[i+1]*f;}
+
+function chart(stage){
+  const el0=stage.el, N=el0.length-1;
+  const ymin=Math.min(...el0), ymax=Math.max(...el0);
+  const pad=(ymax-ymin)*0.12+3;
+  const lo=Math.max(0,Math.floor((ymin-pad)/10)*10), hi=Math.ceil((ymax+pad)/10)*10;
+  const X=i=> ML + (i/N)*PW;
+  const Y=v=> MT + PH - ((v-lo)/(hi-lo))*PH;
+
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,class:"chart",preserveAspectRatio:"xMidYMid meet"});
+
+  // gridlines + y labels
+  const step=niceStep(hi-lo);
+  for(let v=lo; v<=hi+0.1; v+=step){
+    svg.appendChild(el("line",{x1:ML,y1:Y(v),x2:W-MR,y2:Y(v),stroke:"var(--grid)","stroke-width":1}));
+    const t=el("text",{x:ML-8,y:Y(v)+4,"text-anchor":"end",fill:"var(--muted)","font-size":11});
+    t.textContent=Math.round(v);t.setAttribute("font-family","system-ui");svg.appendChild(t);
+  }
+  // x labels every ~20km
+  const xstep = stage.km>110?20:20;
+  for(let kmv=0; kmv<=stage.km+0.1; kmv+=xstep){
+    if(kmv>0 && (stage.km-kmv) < stage.km*0.06) continue;
+    const xi=ML+(kmv/stage.km)*PW;
+    const t=el("text",{x:xi,y:H-12,"text-anchor":"middle",fill:"var(--muted)","font-size":11});
+    t.textContent=Math.round(kmv);t.setAttribute("font-family","system-ui");svg.appendChild(t);
+  }
+  const xl=el("text",{x:W-MR,y:H-12,"text-anchor":"end",fill:"var(--muted)","font-size":11});
+  xl.textContent="km";xl.setAttribute("font-family","system-ui");svg.appendChild(xl);
+
+  // area + line
+  let dline="", darea="M "+X(0)+" "+Y(lo);
+  for(let i=0;i<=N;i++){const x=X(i),y=Y(el0[i]);dline+=(i?" L ":"M ")+x+" "+y;darea+=" L "+x+" "+y;}
+  darea+=" L "+X(N)+" "+Y(lo)+" Z";
+  svg.appendChild(el("path",{d:darea,fill:"var(--series-fill)",stroke:"none"}));
+  svg.appendChild(el("path",{d:dline,fill:"none",stroke:"var(--series)","stroke-width":2,"stroke-linejoin":"round"}));
+  // baseline
+  svg.appendChild(el("line",{x1:ML,y1:Y(lo),x2:W-MR,y2:Y(lo),stroke:"var(--axis)","stroke-width":1}));
+
+  // climb markers
+  stage.climbs.forEach(c=>{
+    const pos=(c[0]/stage.km)*N; const x=X(pos); const yv=interp(el0,pos); const y=Y(yv);
+    const tri=el("path",{d:`M ${x} ${y-7} L ${x-5} ${y-15} L ${x+5} ${y-15} Z`,fill:"var(--climb)",stroke:"var(--surface)","stroke-width":1});
+    svg.appendChild(tri);
+    const lab=el("text",{x:x,y:y-19,"text-anchor":"middle",fill:"var(--climb)","font-size":11,"font-weight":600});
+    lab.textContent=String(c[1]).replace(".",",")+"%";lab.setAttribute("font-family","system-ui");svg.appendChild(lab);
+  });
+
+  // hover
+  const hoverLine=el("line",{x1:ML,y1:MT,x2:ML,y2:MT+PH,stroke:"var(--ink2)","stroke-width":1,opacity:0});
+  const hoverDot=el("circle",{r:4,fill:"var(--series)",stroke:"var(--surface)","stroke-width":2,opacity:0});
+  svg.appendChild(hoverLine);svg.appendChild(hoverDot);
+  const overlay=el("rect",{x:ML,y:MT,width:PW,height:PH,fill:"transparent"});
+  svg.appendChild(overlay);
+  const tt=document.getElementById("tt");
+  function move(evt){
+    const r=svg.getBoundingClientRect();
+    const px=(evt.touches?evt.touches[0].clientX:evt.clientX);
+    const sx=(px-r.left)/r.width*W;
+    let frac=(sx-ML)/PW; frac=Math.max(0,Math.min(1,frac));
+    const idx=Math.round(frac*N); const x=X(idx), y=Y(el0[idx]);
+    hoverLine.setAttribute("x1",x);hoverLine.setAttribute("x2",x);hoverLine.setAttribute("opacity",.5);
+    hoverDot.setAttribute("cx",x);hoverDot.setAttribute("cy",y);hoverDot.setAttribute("opacity",1);
+    tt.style.opacity=1;
+    tt.textContent=`${(idx/N*stage.km).toFixed(1)} km · ${el0[idx]} m`;
+    tt.style.left=(px+12)+"px"; tt.style.top=((evt.touches?evt.touches[0].clientY:evt.clientY)-10)+"px";
+  }
+  function leave(){hoverLine.setAttribute("opacity",0);hoverDot.setAttribute("opacity",0);tt.style.opacity=0;}
+  overlay.addEventListener("mousemove",move);
+  overlay.addEventListener("mouseleave",leave);
+  overlay.addEventListener("touchmove",move,{passive:true});
+  overlay.addEventListener("touchend",leave);
+  return svg;
+}
+
+const cards=document.getElementById("cards");
+STAGES.forEach(s=>{
+  const c=document.createElement("div");c.className="card";
+  c.innerHTML=`<h2>${s.title}</h2><p class="route">${s.route}</p>
+    <div class="stat-row">
+      <span class="s"><b>${s.km}</b> km</span>
+      <span class="s">D+ <b>≈ ${s.dplus.toLocaleString('fr-FR')}</b> m</span>
+      <span class="s">Alt. <b>${s.min}</b>–<b>${s.max}</b> m</span>
+    </div>`;
+  c.appendChild(chart(s));
+  const chips=document.createElement("div");chips.className="chips";
+  chips.innerHTML=`<span class="note" style="margin-right:4px">Côtes :</span>`+
+    s.climbs.map(c=>`<span class="chip"><span class="dot"></span>${c[2]} <b>${String(c[1]).replace('.',',')}%</b></span>`).join("");
+  c.appendChild(chips);
+  cards.appendChild(c);
+});
+
+// theme toggle
+const root=document.documentElement, tg=document.getElementById("tg");
+tg.addEventListener("click",()=>{
+  const cur=root.getAttribute("data-theme");
+  const dark=window.matchMedia("(prefers-color-scheme:dark)").matches;
+  const isDark = cur? cur==="dark" : dark;
+  root.setAttribute("data-theme", isDark? "light":"dark");
+});
+</script>
+</body>
+</html>
