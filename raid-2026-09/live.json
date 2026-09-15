@@ -1,0 +1,9 @@
+{
+  "_aide": "Colle ici les liens de suivi en direct. etape1/2/3 = lien Garmin LiveTrack ou Strava Beacon du jour (à créer au départ de chaque étape). global = lien stable de partage de position Google Maps (valable 3 jours). Laisser vide = bouton grisé.",
+  "etape1": "",
+  "etape2": "",
+  "etape3": "",
+  "global": "",
+  "global_label": "Position partagée (Google Maps)",
+  "note": ""
+}

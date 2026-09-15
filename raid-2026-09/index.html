@@ -57,9 +57,18 @@
     border:1px solid var(--border);border-radius:999px;padding:5px 11px;font-size:12.5px;color:var(--ink2);}
   .chip .dot{width:8px;height:8px;border-radius:2px;background:var(--climb);}
   .chip b{color:var(--ink);font-variant-numeric:tabular-nums;}
-  .card.audit h3{font-size:13px;margin:10px 0 4px;color:var(--ink2);font-weight:600;}
+  details.audit{margin-top:14px;border-top:1px solid var(--grid);padding-top:10px;}
+  details.audit summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;
+    padding:7px 13px;border:1px solid var(--border);border-radius:999px;background:var(--page);color:var(--ink);}
+  details.audit summary::-webkit-details-marker{display:none}
+  details.audit summary .hint{font-weight:400;color:var(--muted);font-size:12.5px}
+  details.audit[open] summary .hint{display:none}
+  details.audit summary:hover{border-color:var(--series)}
+  details.audit h3{font-size:13px;margin:10px 0 4px;color:var(--ink2);font-weight:600;}
+  .live{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--ink2);}
+  .live .btn.off{background:var(--grid);color:var(--muted);pointer-events:none;}
   .agrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 22px;}
-  .agrid ul{margin:0;padding-left:18px;font-size:13.5px;}
+  details.audit .agrid ul{margin:0;padding-left:18px;font-size:13.5px;}
   .agrid li{margin:3px 0;} .agrid li b{font-variant-numeric:tabular-nums;} .agrid .len{color:var(--muted);} .agrid li.none{color:var(--muted);list-style:none;margin-left:-18px;}
   @media(max-width:640px){.agrid{grid-template-columns:1fr}}
   .note{color:var(--muted);font-size:12.5px;margin-top:10px;}
@@ -113,9 +122,10 @@
   <div id="cards"></div>
 
 
-  <div class="card audit">
-    <h2>🟢 Trafic &amp; voiture suiveuse — étape 1</h2>
-    <p class="route">65 % de routes calmes · 0,4 % de routes principales (0,6 km) · 33,7 % de secondaires (46,6 km) · 0,5 km interdits à la voiture · 0,1 km non revêtus</p>
+  <template id="audit-1">
+    <details class="audit">
+    <summary>🟢 Trafic &amp; voiture suiveuse <span class="hint">— déplier</span></summary>
+    <p class="route" style="margin-top:8px">65 % de routes calmes · 0,4 % de routes principales (0,6 km) · 33,7 % de secondaires (46,6 km) · 0,5 km interdits à la voiture · 0,1 km non revêtus</p>
     <div class="agrid">
       <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li><b>km 99,9 → 100,3</b> <span class="len">(0,4 km)</span> D 941 · 80 km/h</li>
 </ul></div>
@@ -138,10 +148,12 @@
 </ul></div>
     </div>
     <p class="note">Retouches : 13/09, sortie de Calais par les D 247 (Virval, Coulogne, écluse Carrée, Les Attaques) au lieu de la D 943 ; 15/09, la D 119 route de Saint-Omer (Calais) et la D 341 Chaussée Brunehaut (Ouve-Wirquin) sont contournées (+4,9 km au total). Restent 400 m de D 941 à Tincques (le détour coûterait 18 km) et une traversée de 80 m. Contrôle satellite de la voie de service vers Laires : voie étroite à surface claire et uniforme, vraisemblablement bitumée.</p>
-  </div>
-  <div class="card audit">
-    <h2>🟢 Trafic &amp; voiture suiveuse — étape 2</h2>
-    <p class="route">82 % de routes calmes · 0,1 % de routes principales (0,1 km) · 18,1 % de secondaires (20,4 km) · 0,2 km interdits à la voiture · 0,2 km non revêtus</p>
+    </details>
+  </template>
+  <template id="audit-2">
+    <details class="audit">
+    <summary>🟢 Trafic &amp; voiture suiveuse <span class="hint">— déplier</span></summary>
+    <p class="route" style="margin-top:8px">82 % de routes calmes · 0,1 % de routes principales (0,1 km) · 18,1 % de secondaires (20,4 km) · 0,2 km interdits à la voiture · 0,2 km non revêtus</p>
     <div class="agrid">
       <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li class="none">aucun</li>
 </ul></div>
@@ -162,10 +174,12 @@
 </ul></div>
     </div>
     <p class="note">Retouches : 13/09, la D 917 (ex-RN17) entre Bapaume et Sailly-Saillisel est contournée par Villers-au-Flos et Rocquigny (+2 km) ; 15/09, la sortie de Bapaume évite aussi les 600 m de D 917 en ville : zéro route principale sur l'étape. Contrôle satellite des km 26,1 (voie de service le long de l'A1), 26,7 (chemin de Saint-Aubin) et 31,4 : voies rurales étroites à surface claire et uniforme, sans ornières — vraisemblablement bitumées ou bétonnées, à confirmer sur Street View. La voie de service du km 26 est fermée aux voitures (motor_vehicle=no) : la voiture suiveuse rejoint par la D 7 / D 11E3.</p>
-  </div>
-  <div class="card audit">
-    <h2>🟠 Trafic &amp; voiture suiveuse — étape 3</h2>
-    <p class="route">44 % de routes calmes · 4,4 % de routes principales (6,6 km) · 51,0 % de secondaires (76,2 km) · 14,1 km interdits à la voiture · 0,1 km non revêtus</p>
+    </details>
+  </template>
+  <template id="audit-3">
+    <details class="audit">
+    <summary>🟠 Trafic &amp; voiture suiveuse <span class="hint">— déplier</span></summary>
+    <p class="route" style="margin-top:8px">44 % de routes calmes · 4,4 % de routes principales (6,6 km) · 51,0 % de secondaires (76,2 km) · 14,1 km interdits à la voiture · 0,1 km non revêtus</p>
     <div class="agrid">
       <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li><b>km 3,0 → 3,4</b> <span class="len">(0,3 km)</span> D 937 · Rue de la Chaussée · 50 km/h</li>
 <li><b>km 3,8 → 8,8</b> <span class="len">(5,0 km)</span> D 937</li>
@@ -201,30 +215,31 @@
 </ul></div>
     </div>
     <p class="note">Retouche du 13/09 : la D 937 hors agglomération entre Autreville et Coucy-le-Château est contournée par Champs (+2 km). Il reste la traversée de Chauny et d'Autreville sur la D 937 en ville (50 km/h) et 1 km hors agglomération (km 3,8-4,4 et 8,4-8,8), puis 1,6 km de D 934 pour monter à Coucy. Passe du 15/09 : contourner ces 5,9 km coûte au minimum +6,7 km (Sinceny), et les 480 m de D 951 à Montchenot +12,5 km — conservés, à trancher. Les 14 km de voie verte V52 à l'arrivée restent sans la voiture.</p>
-  </div>
+    </details>
+  </template>
 
   <div class="card" id="downloads">
     <h2>Télécharger les traces GPX</h2>
-    <p class="route">Prêtes pour Garmin, Komoot, OsmAnd… Le lien « Modifier » ouvre la route dans l'éditeur Strava, pour ajuster le tracé et ré-exporter.</p>
+    <p class="route">Prêtes pour Garmin, Komoot, OsmAnd… Le lien « Modifier » ouvre l'éditeur BRouter (bikerouter.de) avec l'étape rechargée par points de passage tous les 6 km (profil très faible trafic) : déplace ou ajoute des points, puis ré-exporte le GPX. Le tracé recalculé peut différer localement de celui du GPX.</p>
     <div class="dlrow">
       <span class="dlname">Étape 1 · Calais → Arras</span>
       <span class="dllinks">
         <a class="btn" href="etape1.gpx" download>⬇ GPX</a>
-        <a class="btn ghost" href="https://www.strava.com/routes/3534197773921378350" target="_blank" rel="noopener">✎ Modifier sur Strava</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/50.625/2.327/standard&lonlats=1.8762,50.9596;1.8872,50.9272;1.9346,50.8965;1.9712,50.8609;2.0168,50.8230;2.0254,50.7813;2.0710,50.7430;2.0911,50.7022;2.1363,50.6757;2.1216,50.6320;2.1721,50.6255;2.2225,50.5984;2.2304,50.5564;2.2540,50.5184;2.2623,50.4777;2.3364,50.4786;2.3704,50.4389;2.4358,50.4088;2.4885,50.3708;2.5418,50.3676;2.6046,50.3519;2.6779,50.3427;2.7192,50.3118;2.7778,50.2907&profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
       </span>
     </div>
     <div class="dlrow">
       <span class="dlname">Étape 2 · Arras → Ognes</span>
       <span class="dllinks">
         <a class="btn" href="etape2.gpx" download>⬇ GPX</a>
-        <a class="btn ghost" href="https://www.strava.com/routes/3534199103596615302" target="_blank" rel="noopener">✎ Modifier sur Strava</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/49.942/2.992/standard&lonlats=2.7778,50.2907;2.8115,50.2495;2.8524,50.2029;2.8560,50.1516;2.8631,50.1040;2.9172,50.0714;2.9256,50.0250;2.9644,49.9883;3.0237,49.9594;3.0911,49.9470;3.1317,49.9042;3.1673,49.8581;3.1717,49.8145;3.2072,49.7722;3.1783,49.7296;3.1549,49.6915;3.1451,49.6592;3.1026,49.6285;3.1407,49.5930;3.1866,49.6097&profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
       </span>
     </div>
     <div class="dlrow">
       <span class="dlname">Étape 3 · Ognes → Saint-Martin-sur-le-Pré</span>
       <span class="dllinks">
         <a class="btn" href="etape3.gpx" download>⬇ GPX</a>
-        <a class="btn ghost" href="https://www.strava.com/routes/3534202829884596870" target="_blank" rel="noopener">✎ Modifier sur Strava</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/49.293/3.763/standard&lonlats=3.1866,49.6097;3.2547,49.5624;3.2843,49.5210;3.3445,49.5122;3.4099,49.5118;3.4680,49.4780;3.5024,49.4422;3.5337,49.4064;3.5965,49.3915;3.6533,49.3741;3.6715,49.3252;3.6907,49.2792;3.7591,49.2515;3.8206,49.2393;3.8925,49.2526;3.9281,49.2163;3.9557,49.1744;4.0194,49.1642;4.0933,49.1564;4.1606,49.1513;4.1400,49.1084;4.1521,49.0795;4.1787,49.0415;4.2486,49.0126;4.3384,48.9771&profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
       </span>
     </div>
   </div>
@@ -348,8 +363,25 @@ STAGES.forEach(s=>{
   chips.innerHTML=`<span class="note" style="margin-right:4px">Côtes :</span>`+
     s.climbs.map(c=>`<span class="chip"><span class="dot"></span>${c[2]} <b>${String(c[1]).replace('.',',')}%</b></span>`).join("");
   c.appendChild(chips);
+  const live=document.createElement("div");live.className="live";live.dataset.stage=s.n;
+  live.innerHTML=`<span>📍 Suivi en direct :</span><a class="btn off" href="#">pas encore de lien</a>`;
+  c.appendChild(live);
+  const tpl=document.getElementById("audit-"+s.n);
+  if(tpl) c.appendChild(tpl.content.cloneNode(true));
   cards.appendChild(c);
 });
+
+// live tracking links: lus dans live.json (même dossier), éditable depuis GitHub sans toucher au HTML
+fetch("live.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{
+  if(!j) return;
+  document.querySelectorAll(".live").forEach(el=>{
+    const n=el.dataset.stage; const links=[];
+    if(j["etape"+n]) links.push(`<a class="btn" href="${j["etape"+n]}" target="_blank" rel="noopener">📍 Étape ${n} en direct</a>`);
+    if(j.global) links.push(`<a class="btn ghost" href="${j.global}" target="_blank" rel="noopener">${j.global_label||"Position partagée (3 jours)"}</a>`);
+    if(links.length){el.innerHTML=`<span>📍 Suivi en direct :</span>`+links.join("");}
+    if(j.note){const p=document.createElement("span");p.className="note";p.textContent=j.note;el.appendChild(p);}
+  });
+}).catch(()=>{});
 
 // theme toggle
 const root=document.documentElement, tg=document.getElementById("tg");
