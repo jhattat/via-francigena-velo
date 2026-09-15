@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raid Calais → Champagne 2026</title>
+<style>
+  :root{
+    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --series:#2a78d6; --series-fill:rgba(42,120,214,.14);
+    --climb:#eb6834; --border:rgba(11,11,11,.10); --good:#0ca30c;
+    color-scheme:light;
+  }
+  :root[data-theme="dark"]{
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --series:#3987e5; --series-fill:rgba(57,135,229,.20);
+    --climb:#d95926; --border:rgba(255,255,255,.10); --good:#0ca30c;
+    color-scheme:dark;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --axis:#383835; --series:#3987e5; --series-fill:rgba(57,135,229,.20);
+      --climb:#d95926; --border:rgba(255,255,255,.10);
+      color-scheme:dark;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 20px 64px;}
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em;}
+  .sub{color:var(--ink2);font-size:15px;margin:0;}
+  .toggle{border:1px solid var(--border);background:var(--surface);color:var(--ink2);
+    border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;white-space:nowrap;}
+  .toggle:hover{color:var(--ink);}
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 8px;}
+  .tile{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;}
+  .tile .v{font-size:24px;font-weight:650;letter-spacing:-.01em;}
+  .tile .l{font-size:12.5px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.03em;}
+  table.sum{width:100%;border-collapse:collapse;margin:22px 0 6px;font-size:14.5px;}
+  table.sum th,table.sum td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--grid);}
+  table.sum th{color:var(--muted);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;}
+  table.sum td.n{font-variant-numeric:tabular-nums;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    padding:18px 18px 14px;margin-top:20px;}
+  .card h2{font-size:18px;margin:0 0 2px;}
+  .card .route{color:var(--ink2);font-size:14px;margin:0 0 12px;}
+  .stat-row{display:flex;flex-wrap:wrap;gap:18px;margin:0 0 6px;}
+  .stat-row .s{font-size:13.5px;color:var(--ink2);}
+  .stat-row .s b{color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums;}
+  .chart{width:100%;height:auto;display:block;touch-action:none;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--page);
+    border:1px solid var(--border);border-radius:999px;padding:5px 11px;font-size:12.5px;color:var(--ink2);}
+  .chip .dot{width:8px;height:8px;border-radius:2px;background:var(--climb);}
+  .chip b{color:var(--ink);font-variant-numeric:tabular-nums;}
+  .card.audit h3{font-size:13px;margin:10px 0 4px;color:var(--ink2);font-weight:600;}
+  .agrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 22px;}
+  .agrid ul{margin:0;padding-left:18px;font-size:13.5px;}
+  .agrid li{margin:3px 0;} .agrid li b{font-variant-numeric:tabular-nums;} .agrid .len{color:var(--muted);} .agrid li.none{color:var(--muted);list-style:none;margin-left:-18px;}
+  @media(max-width:640px){.agrid{grid-template-columns:1fr}}
+  .note{color:var(--muted);font-size:12.5px;margin-top:10px;}
+  .foot{margin-top:30px;border-top:1px solid var(--grid);padding-top:18px;color:var(--ink2);font-size:13.5px;}
+  .foot b{color:var(--ink);}
+  .files{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .file{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:6px 10px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--ink2);}
+  .dlrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    padding:11px 0;border-bottom:1px solid var(--grid);}
+  .dlrow:last-child{border-bottom:none;}
+  .dlname{font-size:14.5px;color:var(--ink);}
+  .dllinks{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:13px;
+    padding:7px 13px;border-radius:999px;background:var(--series);color:#fff;font-weight:600;white-space:nowrap;}
+  .btn:hover{filter:brightness(1.06);}
+  .btn.ghost{background:transparent;color:var(--series);border:1px solid var(--series);font-weight:500;}
+  @media(max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}h1{font-size:22px}}
+  /* tooltip */
+  .tt{position:fixed;pointer-events:none;background:var(--ink);color:var(--page);
+    padding:6px 9px;border-radius:8px;font-size:12px;font-variant-numeric:tabular-nums;
+    opacity:0;transition:opacity .08s;z-index:10;white-space:nowrap;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Raid Calais → Champagne 🚲</h1>
+      <p class="sub"><a href="../" style="color:var(--series)">← version de juillet (archive)</a> · 25-27 septembre 2026 · Calais → Saint-Martin-sur-le-Pré · tracés Strava « test étape 1-2-3 » retouchés les 13 et 15/09 · sans routes principales sauf traversées · voiture suiveuse</p>
+    </div>
+    <button class="toggle" id="tg">◐ Thème</button>
+  </header>
+
+  <div class="tiles">
+    <div class="tile"><div class="v">400 km</div><div class="l">Distance totale</div></div>
+    <div class="tile"><div class="v">~3 550 m</div><div class="l">Dénivelé + cumulé</div></div>
+    <div class="tile"><div class="v">3 étapes</div><div class="l">≈ 133 km / jour</div></div>
+    <div class="tile"><div class="v">~62 %</div><div class="l">Routes calmes</div></div>
+  </div>
+
+  <table class="sum">
+    <thead><tr><th>Étape</th><th>Trajet</th><th>Distance</th><th>D+</th><th>Alt. max</th><th>Routes calmes</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Calais → Arras</td><td class="n">138 km</td><td class="n">≈ +1 210 m</td><td class="n">183 m</td><td class="n">🟢 65 %</td></tr>
+      <tr><td>2</td><td>Arras → Ognes</td><td class="n">113 km</td><td class="n">≈ +930 m</td><td class="n">177 m</td><td class="n">🟢 82 %</td></tr>
+      <tr><td>3</td><td>Ognes → Saint-Martin-sur-le-Pré</td><td class="n">149 km</td><td class="n">≈ +1 414 m</td><td class="n">287 m</td><td class="n">🟠 44 %</td></tr>
+    </tbody>
+  </table>
+
+  <div id="cards"></div>
+
+
+  <div class="card audit">
+    <h2>🟢 Trafic &amp; voiture suiveuse — étape 1</h2>
+    <p class="route">65 % de routes calmes · 0,4 % de routes principales (0,6 km) · 33,7 % de secondaires (46,6 km) · 0,5 km interdits à la voiture · 0,1 km non revêtus</p>
+    <div class="agrid">
+      <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li><b>km 99,9 → 100,3</b> <span class="len">(0,4 km)</span> D 941 · 80 km/h</li>
+</ul></div>
+      <div><h3>🟠 Départementales secondaires (&gt; 800 m)</h3><ul><li><b>km 27,3 → 28,6</b> <span class="len">(1,3 km)</span> D 217 · Rue d'Ecambre · 50 km/h</li>
+<li><b>km 28,6 → 33,5</b> <span class="len">(5,0 km)</span> D 225 · 80 km/h</li>
+<li><b>km 34,9 → 38,3</b> <span class="len">(3,4 km)</span> D 225</li>
+<li><b>km 46,5 → 47,4</b> <span class="len">(0,9 km)</span> D 192 · Rue Bernard Chochoy · 50 km/h</li>
+<li><b>km 52,0 → 53,8</b> <span class="len">(1,8 km)</span> D 225 · Rue Principale · 50 km/h</li>
+<li><b>km 91,0 → 91,9</b> <span class="len">(0,9 km)</span> D 77 · Rue de Saint-Omer</li>
+<li><b>km 93,3 → 96,0</b> <span class="len">(2,7 km)</span> D 77 · 80 km/h</li>
+<li><b>km 97,6 → 99,9</b> <span class="len">(2,3 km)</span> D 77 · 50 km/h</li>
+<li><b>km 101,9 → 102,9</b> <span class="len">(1,0 km)</span> D 77 · 80 km/h</li>
+<li><b>km 103,8 → 107,0</b> <span class="len">(3,3 km)</span> D 77 · 80 km/h</li>
+<li><b>km 108,0 → 109,1</b> <span class="len">(1,1 km)</span> D 77 · 80 km/h</li>
+</ul></div>
+      <div><h3>🚗 La voiture ne passe pas (pistes, chemins)</h3><ul><li><b>km 42,0 → 42,3</b> <span class="len">(0,3 km)</span> Chemin de Mombreux · bitume</li>
+</ul></div>
+      <div><h3>⚠️ Revêtement non bitumé ou inconnu</h3><ul><li><b>km 81,2 → 82,2</b> <span class="len">(1,0 km)</span> service · revêtement non renseigné</li>
+<li><b>km 138,0 → 138,1</b> <span class="len">(0,1 km)</span> Place des Héros · pavés</li>
+</ul></div>
+    </div>
+    <p class="note">Retouches : 13/09, sortie de Calais par les D 247 (Virval, Coulogne, écluse Carrée, Les Attaques) au lieu de la D 943 ; 15/09, la D 119 route de Saint-Omer (Calais) et la D 341 Chaussée Brunehaut (Ouve-Wirquin) sont contournées (+4,9 km au total). Restent 400 m de D 941 à Tincques (le détour coûterait 18 km) et une traversée de 80 m. Contrôle satellite de la voie de service vers Laires : voie étroite à surface claire et uniforme, vraisemblablement bitumée.</p>
+  </div>
+  <div class="card audit">
+    <h2>🟢 Trafic &amp; voiture suiveuse — étape 2</h2>
+    <p class="route">82 % de routes calmes · 0,1 % de routes principales (0,1 km) · 18,1 % de secondaires (20,4 km) · 0,2 km interdits à la voiture · 0,2 km non revêtus</p>
+    <div class="agrid">
+      <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li class="none">aucun</li>
+</ul></div>
+      <div><h3>🟠 Départementales secondaires (&gt; 800 m)</h3><ul><li><b>km 1,8 → 2,7</b> <span class="len">(1,0 km)</span> Route de Bapaume · 50 km/h</li>
+<li><b>km 4,3 → 5,3</b> <span class="len">(1,0 km)</span> D 5 · Avenue François Mitterrand · 50 km/h</li>
+<li><b>km 7,2 → 9,0</b> <span class="len">(1,8 km)</span> D 5 · 80 km/h</li>
+<li><b>km 51,4 → 52,2</b> <span class="len">(0,9 km)</span> D 6 · 80 km/h</li>
+<li><b>km 71,0 → 72,6</b> <span class="len">(1,6 km)</span> D 32 · 80 km/h</li>
+<li><b>km 73,9 → 75,9</b> <span class="len">(2,0 km)</span> D 32 · 80 km/h</li>
+<li><b>km 86,2 → 87,5</b> <span class="len">(1,3 km)</span> D 937 · 80 km/h</li>
+</ul></div>
+      <div><h3>🚗 La voiture ne passe pas (pistes, chemins)</h3><ul><li class="none">aucun</li>
+</ul></div>
+      <div><h3>⚠️ Revêtement non bitumé ou inconnu</h3><ul><li><b>km 0,0 → 0,1</b> <span class="len">(0,1 km)</span> Place des Héros · pavés</li>
+<li><b>km 25,3 → 25,5</b> <span class="len">(0,2 km)</span> service · revêtement non renseigné</li>
+<li><b>km 25,5 → 26,6</b> <span class="len">(1,0 km)</span> Chemin de Saint-Aubin · revêtement non renseigné</li>
+<li><b>km 30,5 → 31,0</b> <span class="len">(0,6 km)</span> service · revêtement non renseigné</li>
+</ul></div>
+    </div>
+    <p class="note">Retouches : 13/09, la D 917 (ex-RN17) entre Bapaume et Sailly-Saillisel est contournée par Villers-au-Flos et Rocquigny (+2 km) ; 15/09, la sortie de Bapaume évite aussi les 600 m de D 917 en ville : zéro route principale sur l'étape. Contrôle satellite des km 26,1 (voie de service le long de l'A1), 26,7 (chemin de Saint-Aubin) et 31,4 : voies rurales étroites à surface claire et uniforme, sans ornières — vraisemblablement bitumées ou bétonnées, à confirmer sur Street View. La voie de service du km 26 est fermée aux voitures (motor_vehicle=no) : la voiture suiveuse rejoint par la D 7 / D 11E3.</p>
+  </div>
+  <div class="card audit">
+    <h2>🟠 Trafic &amp; voiture suiveuse — étape 3</h2>
+    <p class="route">44 % de routes calmes · 4,4 % de routes principales (6,6 km) · 51,0 % de secondaires (76,2 km) · 14,1 km interdits à la voiture · 0,1 km non revêtus</p>
+    <div class="agrid">
+      <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li><b>km 3,0 → 3,4</b> <span class="len">(0,3 km)</span> D 937 · Rue de la Chaussée · 50 km/h</li>
+<li><b>km 3,8 → 8,8</b> <span class="len">(5,0 km)</span> D 937</li>
+<li><b>km 104,1 → 104,4</b> <span class="len">(0,3 km)</span> D 951 · Route Nationale · 50 km/h</li>
+</ul></div>
+      <div><h3>🟠 Départementales secondaires (&gt; 800 m)</h3><ul><li><b>km 15,4 → 16,6</b> <span class="len">(1,2 km)</span> D 934 · 80 km/h</li>
+<li><b>km 17,5 → 18,3</b> <span class="len">(0,8 km)</span> D 937 · Avenue de Framlingham · 50 km/h</li>
+<li><b>km 25,1 → 27,0</b> <span class="len">(1,9 km)</span> D 5 · 80 km/h</li>
+<li><b>km 29,1 → 30,0</b> <span class="len">(0,9 km)</span> D 14 · Route de Brancourt</li>
+<li><b>km 31,0 → 31,8</b> <span class="len">(0,8 km)</span> D 14 · Rue de la Vendée · 50 km/h</li>
+<li><b>km 32,6 → 36,5</b> <span class="len">(3,9 km)</span> D 14</li>
+<li><b>km 44,4 → 45,7</b> <span class="len">(1,3 km)</span> D 925 · Route de Chavonne</li>
+<li><b>km 46,5 → 47,6</b> <span class="len">(1,1 km)</span> D 925 · Route de Vailly · 70 km/h</li>
+<li><b>km 56,1 → 64,0</b> <span class="len">(7,9 km)</span> D 967</li>
+<li><b>km 67,4 → 69,1</b> <span class="len">(1,7 km)</span> D 386 · 80 km/h</li>
+<li><b>km 70,3 → 73,2</b> <span class="len">(2,9 km)</span> D 386 · 80 km/h</li>
+<li><b>km 74,0 → 75,2</b> <span class="len">(1,2 km)</span> D 386 · 80 km/h</li>
+<li><b>km 93,4 → 95,8</b> <span class="len">(2,3 km)</span> D 26 · 80 km/h</li>
+<li><b>km 97,8 → 98,7</b> <span class="len">(0,9 km)</span> D 26 · 80 km/h</li>
+<li><b>km 101,2 → 102,1</b> <span class="len">(0,9 km)</span> D 26</li>
+<li><b>km 110,5 → 112,2</b> <span class="len">(1,7 km)</span> D 26 · 80 km/h</li>
+<li><b>km 113,2 → 114,6</b> <span class="len">(1,4 km)</span> D 26</li>
+<li><b>km 115,6 → 117,1</b> <span class="len">(1,5 km)</span> D 26</li>
+<li><b>km 125,4 → 126,2</b> <span class="len">(0,9 km)</span> D 34 · 80 km/h</li>
+<li><b>km 131,2 → 133,9</b> <span class="len">(2,7 km)</span> D 37 · 80 km/h</li>
+</ul></div>
+      <div><h3>🚗 La voiture ne passe pas (pistes, chemins)</h3><ul><li><b>km 134,8 → 139,3</b> <span class="len">(4,5 km)</span> V 52 · bitume</li>
+<li><b>km 139,3 → 146,3</b> <span class="len">(7,0 km)</span> piste cyclable · bitume</li>
+<li><b>km 146,3 → 147,4</b> <span class="len">(1,0 km)</span> V 52 · bitume</li>
+<li><b>km 147,4 → 148,7</b> <span class="len">(1,4 km)</span> La Bicycl'Est (V 52) · bitume</li>
+</ul></div>
+      <div><h3>⚠️ Revêtement non bitumé ou inconnu</h3><ul><li class="none">aucun</li>
+</ul></div>
+    </div>
+    <p class="note">Retouche du 13/09 : la D 937 hors agglomération entre Autreville et Coucy-le-Château est contournée par Champs (+2 km). Il reste la traversée de Chauny et d'Autreville sur la D 937 en ville (50 km/h) et 1 km hors agglomération (km 3,8-4,4 et 8,4-8,8), puis 1,6 km de D 934 pour monter à Coucy. Passe du 15/09 : contourner ces 5,9 km coûte au minimum +6,7 km (Sinceny), et les 480 m de D 951 à Montchenot +12,5 km — conservés, à trancher. Les 14 km de voie verte V52 à l'arrivée restent sans la voiture.</p>
+  </div>
+
+  <div class="card" id="downloads">
+    <h2>Télécharger les traces GPX</h2>
+    <p class="route">Prêtes pour Garmin, Komoot, OsmAnd… Le lien « Modifier » ouvre la route dans l'éditeur Strava, pour ajuster le tracé et ré-exporter.</p>
+    <div class="dlrow">
+      <span class="dlname">Étape 1 · Calais → Arras</span>
+      <span class="dllinks">
+        <a class="btn" href="etape1.gpx" download>⬇ GPX</a>
+        <a class="btn ghost" href="https://www.strava.com/routes/3534197773921378350" target="_blank" rel="noopener">✎ Modifier sur Strava</a>
+      </span>
+    </div>
+    <div class="dlrow">
+      <span class="dlname">Étape 2 · Arras → Ognes</span>
+      <span class="dllinks">
+        <a class="btn" href="etape2.gpx" download>⬇ GPX</a>
+        <a class="btn ghost" href="https://www.strava.com/routes/3534199103596615302" target="_blank" rel="noopener">✎ Modifier sur Strava</a>
+      </span>
+    </div>
+    <div class="dlrow">
+      <span class="dlname">Étape 3 · Ognes → Saint-Martin-sur-le-Pré</span>
+      <span class="dllinks">
+        <a class="btn" href="etape3.gpx" download>⬇ GPX</a>
+        <a class="btn ghost" href="https://www.strava.com/routes/3534202829884596870" target="_blank" rel="noopener">✎ Modifier sur Strava</a>
+      </span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p>Tracés dessinés dans <b>Strava</b> (routes « test étape 1-2-3 » du 13/09/2026), puis <b>J1 et J2 retouchés avec BRouter</b> (profil très faible trafic) : sortie de Calais par les D 247 le long du canal au lieu de la D 943, contournement de la D 917 (ex-RN17) entre Bapaume et Sailly-Saillisel par Villers-au-Flos et Rocquigny, contournement de la D 937 entre Autreville et Coucy-le-Château par Champs. Exposition mesurée sur les tags OpenStreetMap (rééchantillonnage 80 m, appariement Overpass) : <b>1,8 % primaire</b>, 35,8 % secondaire, le reste sur petites départementales, voies communales et pistes cyclables. Dénivelé issu de l'altimétrie Strava (± 10 % selon l'appli GPS). Le tag « primary » est un bon prédicteur de trafic, pas une mesure : à croiser avec la heatmap Strava sur les cas limites.</p>
+  </div>
+</div>
+
+<div class="tt" id="tt"></div>
+
+<script>
+const STAGES = [
+  {n:1, title:"Étape 1 — Calais → Arras", route:"Vendredi 25/09 · Les Attaques · Tournehem-sur-la-Hem · Lumbres · Bomy · Heuchin · Mont-Saint-Éloi",
+   km:138, dplus:1210, min:0, max:183,
+   climbs:[[54.9,8.8,"Avroult"],[61.5,8.8,"Coyecques"],[64.3,8.4,"Coyecques"],[25.5,6.6,"Tournehem-sur-la-Hem"]],
+   el:[2, 3, 3, 2, 9, 4, 2, 2, 2, 2, 1, 0, 0, 1, 2, 14, 16, 27, 31, 42, 73, 48, 51, 61, 68, 111, 167, 177, 138, 111, 86, 116, 143, 100, 55, 47, 50, 53, 70, 117, 107, 64, 62, 62, 132, 135, 130, 125, 90, 115, 49, 96, 123, 131, 120, 93, 112, 118, 152, 180, 175, 180, 168, 165, 166, 156, 148, 110, 98, 155, 106, 164, 169, 166, 160, 156, 154, 156, 158, 158, 160, 149, 148, 155, 154, 151, 144, 127, 116, 118, 120, 129, 127, 98, 94, 91, 91, 85, 83, 87, 80, 75, 74, 72, 70, 61, 61, 68, 62, 64, 73]},
+  {n:2, title:"Étape 2 — Arras → Ognes", route:"Samedi 26/09 · Bapaume · Villers-au-Flos · Rocquigny · Moislains · Hervilly · Saint-Simon · Cugny · vallée de l'Oise",
+   km:113, dplus:930, min:41, max:177,
+   climbs:[[49.0,7.4,"Buire-Courcelles"],[102.2,6.7,"Beaugies-sous-Bois"],[44.2,5.5,"Moislains"]],
+   el:[73, 78, 85, 95, 95, 73, 81, 78, 76, 65, 75, 78, 90, 96, 95, 108, 116, 91, 99, 97, 110, 115, 124, 121, 131, 120, 129, 128, 122, 123, 129, 132, 132, 131, 146, 151, 148, 144, 125, 129, 93, 71, 95, 138, 137, 133, 106, 88, 121, 71, 72, 74, 76, 76, 96, 83, 86, 85, 114, 111, 109, 105, 79, 78, 105, 116, 107, 94, 97, 99, 97, 93, 96, 93, 80, 71, 69, 83, 71, 86, 75, 66, 68, 67, 71, 70, 74, 93, 107, 108, 103, 71, 98, 91, 107, 101, 98, 105, 88, 124, 177, 113, 86, 57, 53, 42, 43, 45, 42, 49, 54]},
+  {n:3, title:"Étape 3 — Ognes → Saint-Martin-sur-le-Pré", route:"Dimanche 27/09 · Chauny · Champs · Coucy-le-Château · Chemin des Dames · Vailly-sur-Aisne · Fismes · Montagne de Reims · Verzy · Ambonnay",
+   km:149, dplus:1414, min:42, max:287,
+   climbs:[[118.5,10.1,"Verzy"],[104.0,8.6,"Montchenot"],[82.8,7.0,"Treslon"],[59.6,6.4,"Longueval"]],
+   el:[54, 44, 43, 44, 53, 60, 63, 59, 53, 57, 49, 56, 57, 62, 63, 71, 72, 73, 84, 75, 84, 78, 58, 77, 85, 147, 179, 183, 167, 129, 79, 100, 57, 50, 51, 48, 50, 52, 60, 52, 63, 54, 69, 76, 151, 164, 149, 90, 65, 80, 92, 75, 90, 86, 88, 94, 111, 98, 92, 101, 115, 173, 183, 120, 102, 98, 102, 146, 129, 117, 115, 120, 146, 142, 152, 157, 164, 196, 191, 169, 147, 145, 159, 163, 198, 181, 179, 219, 286, 269, 208, 158, 129, 162, 134, 119, 113, 91, 86, 83, 75, 74, 75, 76, 75, 77, 77, 79, 79, 80, 82]}
+];
+
+const NS="http://www.w3.org/2000/svg";
+const W=880, H=250, ML=44, MR=16, MT=18, MB=34;
+const PW=W-ML-MR, PH=H-MT-MB;
+
+function el(tag,attrs){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
+function niceStep(range){const raw=range/4;const p=Math.pow(10,Math.floor(Math.log10(raw)));const n=raw/p;let s=n<1.5?1:n<3?2:n<7?5:10;return s*p;}
+
+function interp(arr,pos){const i=Math.floor(pos),f=pos-i;if(i>=arr.length-1)return arr[arr.length-1];return arr[i]*(1-f)+arr[i+1]*f;}
+
+function chart(stage){
+  const el0=stage.el, N=el0.length-1;
+  const ymin=Math.min(...el0), ymax=Math.max(...el0);
+  const pad=(ymax-ymin)*0.12+3;
+  const lo=Math.max(0,Math.floor((ymin-pad)/10)*10), hi=Math.ceil((ymax+pad)/10)*10;
+  const X=i=> ML + (i/N)*PW;
+  const Y=v=> MT + PH - ((v-lo)/(hi-lo))*PH;
+
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,class:"chart",preserveAspectRatio:"xMidYMid meet"});
+
+  // gridlines + y labels
+  const step=niceStep(hi-lo);
+  for(let v=lo; v<=hi+0.1; v+=step){
+    svg.appendChild(el("line",{x1:ML,y1:Y(v),x2:W-MR,y2:Y(v),stroke:"var(--grid)","stroke-width":1}));
+    const t=el("text",{x:ML-8,y:Y(v)+4,"text-anchor":"end",fill:"var(--muted)","font-size":11});
+    t.textContent=Math.round(v);t.setAttribute("font-family","system-ui");svg.appendChild(t);
+  }
+  // x labels every ~20km
+  const xstep = stage.km>110?20:20;
+  for(let kmv=0; kmv<=stage.km+0.1; kmv+=xstep){
+    if(kmv>0 && (stage.km-kmv) < stage.km*0.06) continue;
+    const xi=ML+(kmv/stage.km)*PW;
+    const t=el("text",{x:xi,y:H-12,"text-anchor":"middle",fill:"var(--muted)","font-size":11});
+    t.textContent=Math.round(kmv);t.setAttribute("font-family","system-ui");svg.appendChild(t);
+  }
+  const xl=el("text",{x:W-MR,y:H-12,"text-anchor":"end",fill:"var(--muted)","font-size":11});
+  xl.textContent="km";xl.setAttribute("font-family","system-ui");svg.appendChild(xl);
+
+  // area + line
+  let dline="", darea="M "+X(0)+" "+Y(lo);
+  for(let i=0;i<=N;i++){const x=X(i),y=Y(el0[i]);dline+=(i?" L ":"M ")+x+" "+y;darea+=" L "+x+" "+y;}
+  darea+=" L "+X(N)+" "+Y(lo)+" Z";
+  svg.appendChild(el("path",{d:darea,fill:"var(--series-fill)",stroke:"none"}));
+  svg.appendChild(el("path",{d:dline,fill:"none",stroke:"var(--series)","stroke-width":2,"stroke-linejoin":"round"}));
+  // baseline
+  svg.appendChild(el("line",{x1:ML,y1:Y(lo),x2:W-MR,y2:Y(lo),stroke:"var(--axis)","stroke-width":1}));
+
+  // climb markers
+  stage.climbs.forEach(c=>{
+    const pos=(c[0]/stage.km)*N; const x=X(pos); const yv=interp(el0,pos); const y=Y(yv);
+    const tri=el("path",{d:`M ${x} ${y-7} L ${x-5} ${y-15} L ${x+5} ${y-15} Z`,fill:"var(--climb)",stroke:"var(--surface)","stroke-width":1});
+    svg.appendChild(tri);
+    const lab=el("text",{x:x,y:y-19,"text-anchor":"middle",fill:"var(--climb)","font-size":11,"font-weight":600});
+    lab.textContent=String(c[1]).replace(".",",")+"%";lab.setAttribute("font-family","system-ui");svg.appendChild(lab);
+  });
+
+  // hover
+  const hoverLine=el("line",{x1:ML,y1:MT,x2:ML,y2:MT+PH,stroke:"var(--ink2)","stroke-width":1,opacity:0});
+  const hoverDot=el("circle",{r:4,fill:"var(--series)",stroke:"var(--surface)","stroke-width":2,opacity:0});
+  svg.appendChild(hoverLine);svg.appendChild(hoverDot);
+  const overlay=el("rect",{x:ML,y:MT,width:PW,height:PH,fill:"transparent"});
+  svg.appendChild(overlay);
+  const tt=document.getElementById("tt");
+  function move(evt){
+    const r=svg.getBoundingClientRect();
+    const px=(evt.touches?evt.touches[0].clientX:evt.clientX);
+    const sx=(px-r.left)/r.width*W;
+    let frac=(sx-ML)/PW; frac=Math.max(0,Math.min(1,frac));
+    const idx=Math.round(frac*N); const x=X(idx), y=Y(el0[idx]);
+    hoverLine.setAttribute("x1",x);hoverLine.setAttribute("x2",x);hoverLine.setAttribute("opacity",.5);
+    hoverDot.setAttribute("cx",x);hoverDot.setAttribute("cy",y);hoverDot.setAttribute("opacity",1);
+    tt.style.opacity=1;
+    tt.textContent=`${(idx/N*stage.km).toFixed(1)} km · ${el0[idx]} m`;
+    tt.style.left=(px+12)+"px"; tt.style.top=((evt.touches?evt.touches[0].clientY:evt.clientY)-10)+"px";
+  }
+  function leave(){hoverLine.setAttribute("opacity",0);hoverDot.setAttribute("opacity",0);tt.style.opacity=0;}
+  overlay.addEventListener("mousemove",move);
+  overlay.addEventListener("mouseleave",leave);
+  overlay.addEventListener("touchmove",move,{passive:true});
+  overlay.addEventListener("touchend",leave);
+  return svg;
+}
+
+const cards=document.getElementById("cards");
+STAGES.forEach(s=>{
+  const c=document.createElement("div");c.className="card";
+  c.innerHTML=`<h2>${s.title}</h2><p class="route">${s.route}</p>
+    <div class="stat-row">
+      <span class="s"><b>${s.km}</b> km</span>
+      <span class="s">D+ <b>≈ ${s.dplus.toLocaleString('fr-FR')}</b> m</span>
+      <span class="s">Alt. <b>${s.min}</b>–<b>${s.max}</b> m</span>
+    </div>`;
+  c.appendChild(chart(s));
+  const chips=document.createElement("div");chips.className="chips";
+  chips.innerHTML=`<span class="note" style="margin-right:4px">Côtes :</span>`+
+    s.climbs.map(c=>`<span class="chip"><span class="dot"></span>${c[2]} <b>${String(c[1]).replace('.',',')}%</b></span>`).join("");
+  c.appendChild(chips);
+  cards.appendChild(c);
+});
+
+// theme toggle
+const root=document.documentElement, tg=document.getElementById("tg");
+tg.addEventListener("click",()=>{
+  const cur=root.getAttribute("data-theme");
+  const dark=window.matchMedia("(prefers-color-scheme:dark)").matches;
+  const isDark = cur? cur==="dark" : dark;
+  root.setAttribute("data-theme", isDark? "light":"dark");
+});
+</script>
+</body>
+</html>
