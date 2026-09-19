@@ -1,7 +1,7 @@
 # Raid Calais → Champagne — 25-27 septembre 2026
 
 Tracés version « test » dessinés par Jay dans Strava le 13/09/2026
-(3 routes : test etape 1 / TestEtape2 / test Etape 3), **les trois étapes retouchées le soir même** (voir historique). Remplace le tracé
+(3 routes : test etape 1 / TestEtape2 / test Etape 3), **les trois étapes retouchées le soir même**, **J1 (v4) et J3 (v3) retracées le 19/09** (voir historique). Remplace le tracé
 Via Francigena de juillet (`via-francigena/`), qui reste en archive.
 
 - **Page interactive** : [index.html](index.html) (tuiles, profils, audit
@@ -10,11 +10,11 @@ Via Francigena de juillet (`via-francigena/`), qui reste en archive.
 
 | Étape | Jour | Trajet | Distance | D+ | Alt. max | Routes calmes | GPX |
 |---|---|---|---|---|---|---|---|
-| 1 | Vendredi 25/09 | Calais → Arras (Les Attaques · Tournehem-sur-la-Hem · Lumbres · Bomy · Heuchin · Mont-Saint-Éloi) | 138 km | ≈ +1 210 m | 183 m | 🟢 65 % | [etape1.gpx](etape1.gpx) |
+| 1 | Vendredi 25/09 | Calais → Arras (Les Attaques · Tournehem-sur-la-Hem · Lumbres · Bomy · Heuchin · Tincques · Savy-Berlette · Mont-Saint-Éloi) — **v4 19/09** | 138 km (137,6) | ≈ +1 130 m | 183 m | 🟢 65 % ⚠️ audit v3 | [etape1.gpx](etape1.gpx) |
 | 2 | Samedi 26/09 | Arras → Ognes (Bapaume · Villers-au-Flos · Rocquigny · Moislains · Hervilly · Saint-Simon · Cugny · vallée de l'Oise) | 113 km | ≈ +930 m | 177 m | 🟢 82 % | [etape2.gpx](etape2.gpx) |
-| 3 | Dimanche 27/09 | Ognes → Saint-Martin-sur-le-Pré (Chauny · Champs · Coucy-le-Château · Chemin des Dames · Vailly-sur-Aisne · Fismes · Montagne de Reims · Verzy · Ambonnay) | 149 km | ≈ +1 414 m | 287 m | 🟠 44 % | [etape3.gpx](etape3.gpx) |
+| 3 | Dimanche 27/09 | Ognes → Saint-Martin-sur-le-Pré (Chauny · Coucy-le-Château · Chemin des Dames · Vailly-sur-Aisne · Fismes · Ville-Dommange · Montagne de Reims · Verzy · Ambonnay) — **v3 19/09** | 154 km (154,4) | ≈ +1 310 m | 286 m | 🟠 44 % ⚠️ audit v2 | [etape3.gpx](etape3.gpx) |
 
-**Total : 400 km · ≈ 3 550 m D+ · 62 % de routes calmes · 1,8 % de primaires**
+**Total : 405 km · ≈ 3 370 m D+ · 62 % de routes calmes · 1,8 % de primaires** (parts calculées sur l'audit du 15/09, J1 v3 et J3 v2)
 
 Routes Strava d'origine :
 [étape 1](https://www.strava.com/routes/3534197773921378350) ·
@@ -22,6 +22,9 @@ Routes Strava d'origine :
 [étape 3](https://www.strava.com/routes/3534202829884596870).
 
 ## Historique
+
+- **2026-09-19 (2)** — v3 de J3 : tracé entièrement recalculé par Jay dans bikerouter.de (`fastbike-verylowtraffic`) à partir des points de passage de la v2, trois points ajoutés au sommet de Verzy. 154,4 km (+5,3), +1 308 m (SRTM BRouter, contre 1 414 m en altimétrie Strava sur la v2). Tracé modifié aux km 10-12, 15-19, 54-61, 77-80, 96-99, 104-105, 129, 134-139. Nouvelles côtes repérées : Ville-Dommange 8 % (km 96), Trépail 9 % (km 129). Total raid 405 km / ≈ 3 370 m. ⚠️ Audit trafic non relancé (Overpass bloqué) : bloc trafic J3 = v2, à refaire, y compris la vérification du contournement de la D 937 par Champs.
+- **2026-09-19** — v4 de J1 : tracé entièrement recalculé par Jay dans bikerouter.de (`fastbike-verylowtraffic`) à partir des points de passage de la v3, points ajoutés à la sortie de Calais (km 2-5) et vers Heuchin (km 90-95), point de Penin supprimé → le secteur D 77 / D 941 est redessiné par Tincques et Savy-Berlette (km 101-112). 137,6 km, +1 128 m (SRTM BRouter, contre 1 210 m en altimétrie Strava sur la v3). Total raid ≈ 3 470 m. ⚠️ L'audit trafic OSM n'a pas pu être relancé (accès Overpass bloqué depuis la session) : le bloc trafic de J1 reste celui de la v3, à refaire.
 
 - **2026-09-15** — v3 « sans routes principales » : profil BRouter personnalisé (primaires pénalisées ×10 à ×1000, chemins non bitumés ×40), appliqué zone par zone sur les tronçons encore en primaire, détour plafonné à 4 km. J1 : D 119 (Calais) et D 341 Chaussée Brunehaut contournées, +4,9 km → 138 km ; J2 : sortie de Bapaume sans D 917, −0,7 km → 113 km, zéro primaire ; J3 inchangée (Chauny +6,7 km minimum et Montchenot +12,5 km refusés). Traversées < 150 m conservées.
 - **2026-09-13 (soir, 2)** — J3 : la D 937 hors agglomération (Autreville → Coucy) est contournée par Champs, +2,1 km. Variantes par Sinceny écartées (+3,7 à +4,4 km, chemin ou voie forestière non renseignée) ; variante ouest Bichancourt/Trosly/Guny écartée (+8 km, 7 km de D 934).

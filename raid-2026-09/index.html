@@ -98,24 +98,24 @@
   <header class="top">
     <div>
       <h1>Raid Calais → Champagne 🚲</h1>
-      <p class="sub"><a href="../" style="color:var(--series)">← version de juillet (archive)</a> · 25-27 septembre 2026 · Calais → Saint-Martin-sur-le-Pré · tracés Strava « test étape 1-2-3 » retouchés les 13 et 15/09 · sans routes principales sauf traversées · voiture suiveuse</p>
+      <p class="sub"><a href="../" style="color:var(--series)">← version de juillet (archive)</a> · 25-27 septembre 2026 · Calais → Saint-Martin-sur-le-Pré · tracés Strava « test étape 1-2-3 » retouchés les 13 et 15/09, J1 et J3 retracées le 19/09 · sans routes principales sauf traversées · voiture suiveuse</p>
     </div>
     <button class="toggle" id="tg">◐ Thème</button>
   </header>
 
   <div class="tiles">
-    <div class="tile"><div class="v">400 km</div><div class="l">Distance totale</div></div>
-    <div class="tile"><div class="v">~3 550 m</div><div class="l">Dénivelé + cumulé</div></div>
-    <div class="tile"><div class="v">3 étapes</div><div class="l">≈ 133 km / jour</div></div>
+    <div class="tile"><div class="v">405 km</div><div class="l">Distance totale</div></div>
+    <div class="tile"><div class="v">~3 370 m</div><div class="l">Dénivelé + cumulé</div></div>
+    <div class="tile"><div class="v">3 étapes</div><div class="l">≈ 135 km / jour</div></div>
     <div class="tile"><div class="v">~62 %</div><div class="l">Routes calmes</div></div>
   </div>
 
   <table class="sum">
     <thead><tr><th>Étape</th><th>Trajet</th><th>Distance</th><th>D+</th><th>Alt. max</th><th>Routes calmes</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td>Calais → Arras</td><td class="n">138 km</td><td class="n">≈ +1 210 m</td><td class="n">183 m</td><td class="n">🟢 65 %</td></tr>
+      <tr><td>1</td><td>Calais → Arras</td><td class="n">138 km</td><td class="n">≈ +1 130 m</td><td class="n">183 m</td><td class="n">🟢 65 %</td></tr>
       <tr><td>2</td><td>Arras → Ognes</td><td class="n">113 km</td><td class="n">≈ +930 m</td><td class="n">177 m</td><td class="n">🟢 82 %</td></tr>
-      <tr><td>3</td><td>Ognes → Saint-Martin-sur-le-Pré</td><td class="n">149 km</td><td class="n">≈ +1 414 m</td><td class="n">287 m</td><td class="n">🟠 44 %</td></tr>
+      <tr><td>3</td><td>Ognes → Saint-Martin-sur-le-Pré</td><td class="n">154 km</td><td class="n">≈ +1 310 m</td><td class="n">286 m</td><td class="n">🟠 44 %</td></tr>
     </tbody>
   </table>
 
@@ -124,8 +124,9 @@
 
   <template id="audit-1">
     <details class="audit">
-    <summary>🟢 Trafic &amp; voiture suiveuse <span class="hint">— déplier</span></summary>
-    <p class="route" style="margin-top:8px">65 % de routes calmes · 0,4 % de routes principales (0,6 km) · 33,7 % de secondaires (46,6 km) · 0,5 km interdits à la voiture · 0,1 km non revêtus</p>
+    <summary>🟢 Trafic &amp; voiture suiveuse <span class="hint">— déplier (audit de la v3, à refaire)</span></summary>
+    <p class="route" style="margin-top:8px">⚠️ Audit du 15/09 sur la v3. La v4 du 19/09 modifie le tracé aux km 2-4 (sortie de Calais), 26-28, 90-95 et 101-112 (secteur D 77 / Tincques : passage par Tincques et Savy-Berlette au lieu de Penin et Villers-Brûlin), 119-122 et 133-137 (arrivée à Arras) : les lignes de ces kilomètres ne sont plus fiables, le reste est inchangé. Ré-audit OSM à relancer.</p>
+    <p class="route">65 % de routes calmes · 0,4 % de routes principales (0,6 km) · 33,7 % de secondaires (46,6 km) · 0,5 km interdits à la voiture · 0,1 km non revêtus</p>
     <div class="agrid">
       <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li><b>km 99,9 → 100,3</b> <span class="len">(0,4 km)</span> D 941 · 80 km/h</li>
 </ul></div>
@@ -147,7 +148,7 @@
 <li><b>km 138,0 → 138,1</b> <span class="len">(0,1 km)</span> Place des Héros · pavés</li>
 </ul></div>
     </div>
-    <p class="note">Retouches : 13/09, sortie de Calais par les D 247 (Virval, Coulogne, écluse Carrée, Les Attaques) au lieu de la D 943 ; 15/09, la D 119 route de Saint-Omer (Calais) et la D 341 Chaussée Brunehaut (Ouve-Wirquin) sont contournées (+4,9 km au total). Restent 400 m de D 941 à Tincques (le détour coûterait 18 km) et une traversée de 80 m. Contrôle satellite de la voie de service vers Laires : voie étroite à surface claire et uniforme, vraisemblablement bitumée.</p>
+    <p class="note">Retouche du 19/09 (v4) : tracé entièrement recalculé par Jay dans bikerouter.de (profil très faible trafic) à partir des points de passage de la v3, avec des points ajoutés à la sortie de Calais (km 2-5) et vers Heuchin (km 90-95), et le point de Penin supprimé : le secteur D 77 → D 941 est redessiné par Tincques et Savy-Berlette (km 101-112). D+ passé de 1 210 m (altimétrie Strava) à 1 128 m (SRTM BRouter). Retouches : 13/09, sortie de Calais par les D 247 (Virval, Coulogne, écluse Carrée, Les Attaques) au lieu de la D 943 ; 15/09, la D 119 route de Saint-Omer (Calais) et la D 341 Chaussée Brunehaut (Ouve-Wirquin) sont contournées (+4,9 km au total). Restent 400 m de D 941 à Tincques (le détour coûterait 18 km) et une traversée de 80 m. Contrôle satellite de la voie de service vers Laires : voie étroite à surface claire et uniforme, vraisemblablement bitumée.</p>
     </details>
   </template>
   <template id="audit-2">
@@ -178,8 +179,9 @@
   </template>
   <template id="audit-3">
     <details class="audit">
-    <summary>🟠 Trafic &amp; voiture suiveuse <span class="hint">— déplier</span></summary>
-    <p class="route" style="margin-top:8px">44 % de routes calmes · 4,4 % de routes principales (6,6 km) · 51,0 % de secondaires (76,2 km) · 14,1 km interdits à la voiture · 0,1 km non revêtus</p>
+    <summary>🟠 Trafic &amp; voiture suiveuse <span class="hint">— déplier (audit de la v2, à refaire)</span></summary>
+    <p class="route" style="margin-top:8px">⚠️ Audit du 15/09 sur la v2. La v3 du 19/09 (recalcul complet bikerouter.de) modifie le tracé aux km 10-12, 15-19 (Coucy), 54-61 (Longueval), 77-80, 96-99 (Ville-Dommange), 104-105, 129 et 134-139 (Ambonnay → voie verte) : les lignes de ces kilomètres ne sont plus fiables, et le contournement de la D 937 par Champs (v2) est à revérifier sur la carte. Ré-audit OSM à relancer.</p>
+    <p class="route">44 % de routes calmes · 4,4 % de routes principales (6,6 km) · 51,0 % de secondaires (76,2 km) · 14,1 km interdits à la voiture · 0,1 km non revêtus</p>
     <div class="agrid">
       <div><h3>🔴 Routes principales (ex-nationales, grosses D)</h3><ul><li><b>km 3,0 → 3,4</b> <span class="len">(0,3 km)</span> D 937 · Rue de la Chaussée · 50 km/h</li>
 <li><b>km 3,8 → 8,8</b> <span class="len">(5,0 km)</span> D 937</li>
@@ -214,18 +216,18 @@
       <div><h3>⚠️ Revêtement non bitumé ou inconnu</h3><ul><li class="none">aucun</li>
 </ul></div>
     </div>
-    <p class="note">Retouche du 13/09 : la D 937 hors agglomération entre Autreville et Coucy-le-Château est contournée par Champs (+2 km). Il reste la traversée de Chauny et d'Autreville sur la D 937 en ville (50 km/h) et 1 km hors agglomération (km 3,8-4,4 et 8,4-8,8), puis 1,6 km de D 934 pour monter à Coucy. Passe du 15/09 : contourner ces 5,9 km coûte au minimum +6,7 km (Sinceny), et les 480 m de D 951 à Montchenot +12,5 km — conservés, à trancher. Les 14 km de voie verte V52 à l'arrivée restent sans la voiture.</p>
+    <p class="note">Retouche du 19/09 (v3) : tracé entièrement recalculé par Jay dans bikerouter.de (profil très faible trafic) à partir des points de passage de la v2, avec trois points ajoutés au sommet de Verzy (km 121, 10,6 %). +5,3 km (154,4 km) et D+ 1 308 m en SRTM BRouter (la v2 affichait 1 414 m en altimétrie Strava). Retouche du 13/09 : la D 937 hors agglomération entre Autreville et Coucy-le-Château est contournée par Champs (+2 km). Il reste la traversée de Chauny et d'Autreville sur la D 937 en ville (50 km/h) et 1 km hors agglomération (km 3,8-4,4 et 8,4-8,8), puis 1,6 km de D 934 pour monter à Coucy. Passe du 15/09 : contourner ces 5,9 km coûte au minimum +6,7 km (Sinceny), et les 480 m de D 951 à Montchenot +12,5 km — conservés, à trancher. Les 14 km de voie verte V52 à l'arrivée restent sans la voiture.</p>
     </details>
   </template>
 
   <div class="card" id="downloads">
     <h2>Télécharger les traces GPX</h2>
-    <p class="route">Prêtes pour Garmin, Komoot, OsmAnd… Le lien « Modifier » ouvre l'éditeur BRouter (bikerouter.de) avec l'étape rechargée par points de passage tous les 6 km (profil très faible trafic) : déplace ou ajoute des points, puis ré-exporte le GPX. Le tracé recalculé peut différer localement de celui du GPX.</p>
+    <p class="route">Prêtes pour Garmin, Komoot, OsmAnd… Le lien « Modifier » ouvre l'éditeur BRouter (bikerouter.de) avec l'étape rechargée par points de passage (ceux des tracés du 19/09 pour les étapes 1 et 3, tous les 6 km pour l'étape 2 ; profil très faible trafic) : déplace ou ajoute des points, puis ré-exporte le GPX. Le tracé recalculé peut différer localement de celui du GPX.</p>
     <div class="dlrow">
-      <span class="dlname">Étape 1 · Calais → Arras</span>
+      <span class="dlname">Étape 1 · Calais → Arras <span class="note">(v4 du 19/09)</span></span>
       <span class="dllinks">
         <a class="btn" href="etape1.gpx" download>⬇ GPX</a>
-        <a class="btn ghost" href="https://bikerouter.de/#map=9/50.625/2.327/standard&lonlats=1.8762,50.9596;1.8872,50.9272;1.9346,50.8965;1.9712,50.8609;2.0168,50.8230;2.0254,50.7813;2.0710,50.7430;2.0911,50.7022;2.1363,50.6757;2.1216,50.6320;2.1721,50.6255;2.2225,50.5984;2.2304,50.5564;2.2540,50.5184;2.2623,50.4777;2.3364,50.4786;2.3704,50.4389;2.4358,50.4088;2.4885,50.3708;2.5418,50.3676;2.6046,50.3519;2.6779,50.3427;2.7192,50.3118;2.7778,50.2907&profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/50.2920/2.3483/standard&amp;lonlats=1.8762,50.9596;1.882203,50.937999;1.884273,50.937127;1.887095,50.928324;1.8872,50.9272;1.884413,50.911705;1.9346,50.8965;1.9712,50.8609;2.0168,50.823;2.0254,50.7813;2.071,50.743;2.0911,50.7022;2.1363,50.6757;2.1216,50.632;2.1721,50.6255;2.2225,50.5984;2.2304,50.5564;2.254,50.5184;2.2623,50.4777;2.3364,50.4786;2.337427,50.453895;2.332835,50.449577;2.3704,50.4389;2.4358,50.4088;2.5418,50.3676;2.6046,50.3519;2.6779,50.3427;2.7192,50.3118;2.7778,50.2907&amp;profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
       </span>
     </div>
     <div class="dlrow">
@@ -236,16 +238,16 @@
       </span>
     </div>
     <div class="dlrow">
-      <span class="dlname">Étape 3 · Ognes → Saint-Martin-sur-le-Pré</span>
+      <span class="dlname">Étape 3 · Ognes → Saint-Martin-sur-le-Pré <span class="note">(v3 du 19/09)</span></span>
       <span class="dllinks">
         <a class="btn" href="etape3.gpx" download>⬇ GPX</a>
-        <a class="btn ghost" href="https://bikerouter.de/#map=9/49.293/3.763/standard&lonlats=3.1866,49.6097;3.2547,49.5624;3.2843,49.5210;3.3445,49.5122;3.4099,49.5118;3.4680,49.4780;3.5024,49.4422;3.5337,49.4064;3.5965,49.3915;3.6533,49.3741;3.6715,49.3252;3.6907,49.2792;3.7591,49.2515;3.8206,49.2393;3.8925,49.2526;3.9281,49.2163;3.9557,49.1744;4.0194,49.1642;4.0933,49.1564;4.1606,49.1513;4.1400,49.1084;4.1521,49.0795;4.1787,49.0415;4.2486,49.0126;4.3384,48.9771&profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
+        <a class="btn ghost" href="https://bikerouter.de/#map=9/49.2920/3.7483/standard&amp;lonlats=3.1866,49.6097;3.2547,49.5624;3.2843,49.521;3.3445,49.5122;3.4099,49.5118;3.468,49.478;3.5024,49.4422;3.5337,49.4064;3.5965,49.3915;3.6533,49.3741;3.6715,49.3252;3.6907,49.2792;3.7591,49.2515;3.8206,49.2393;3.8925,49.2526;3.9281,49.2163;3.9557,49.1744;4.0194,49.1642;4.0933,49.1564;4.1606,49.1513;4.164103,49.148074;4.163437,49.147801;4.162477,49.148362;4.14,49.1084;4.1521,49.0795;4.1787,49.0415;4.2486,49.0126;4.3384,48.9771&amp;profile=fastbike-verylowtraffic" target="_blank" rel="noopener">✎ Modifier (BRouter)</a>
       </span>
     </div>
   </div>
 
   <div class="foot">
-    <p>Tracés dessinés dans <b>Strava</b> (routes « test étape 1-2-3 » du 13/09/2026), puis <b>J1 et J2 retouchés avec BRouter</b> (profil très faible trafic) : sortie de Calais par les D 247 le long du canal au lieu de la D 943, contournement de la D 917 (ex-RN17) entre Bapaume et Sailly-Saillisel par Villers-au-Flos et Rocquigny, contournement de la D 937 entre Autreville et Coucy-le-Château par Champs. Exposition mesurée sur les tags OpenStreetMap (rééchantillonnage 80 m, appariement Overpass) : <b>1,8 % primaire</b>, 35,8 % secondaire, le reste sur petites départementales, voies communales et pistes cyclables. Dénivelé issu de l'altimétrie Strava (± 10 % selon l'appli GPS). Le tag « primary » est un bon prédicteur de trafic, pas une mesure : à croiser avec la heatmap Strava sur les cas limites.</p>
+    <p>Tracés dessinés dans <b>Strava</b> (routes « test étape 1-2-3 » du 13/09/2026), puis <b>J1 et J2 retouchés avec BRouter</b> (profil très faible trafic), <b>J1 et J3 entièrement retracées dans bikerouter.de le 19/09</b> (J1 v4 137,6 km, J3 v3 154,4 km) : sortie de Calais par les D 247 le long du canal au lieu de la D 943, contournement de la D 917 (ex-RN17) entre Bapaume et Sailly-Saillisel par Villers-au-Flos et Rocquigny, contournement de la D 937 entre Autreville et Coucy-le-Château par Champs. Exposition mesurée sur les tags OpenStreetMap (rééchantillonnage 80 m, appariement Overpass) : <b>1,8 % primaire</b>, 35,8 % secondaire, le reste sur petites départementales, voies communales et pistes cyclables. Dénivelé issu de l'altimétrie Strava pour J2, SRTM BRouter pour J1 v4 et J3 v3 (± 10 % selon l'appli GPS). Le tag « primary » est un bon prédicteur de trafic, pas une mesure : à croiser avec la heatmap Strava sur les cas limites.</p>
   </div>
 </div>
 
@@ -253,18 +255,18 @@
 
 <script>
 const STAGES = [
-  {n:1, title:"Étape 1 — Calais → Arras", route:"Vendredi 25/09 · Les Attaques · Tournehem-sur-la-Hem · Lumbres · Bomy · Heuchin · Mont-Saint-Éloi",
-   km:138, dplus:1210, min:0, max:183,
-   climbs:[[54.9,8.8,"Avroult"],[61.5,8.8,"Coyecques"],[64.3,8.4,"Coyecques"],[25.5,6.6,"Tournehem-sur-la-Hem"]],
-   el:[2, 3, 3, 2, 9, 4, 2, 2, 2, 2, 1, 0, 0, 1, 2, 14, 16, 27, 31, 42, 73, 48, 51, 61, 68, 111, 167, 177, 138, 111, 86, 116, 143, 100, 55, 47, 50, 53, 70, 117, 107, 64, 62, 62, 132, 135, 130, 125, 90, 115, 49, 96, 123, 131, 120, 93, 112, 118, 152, 180, 175, 180, 168, 165, 166, 156, 148, 110, 98, 155, 106, 164, 169, 166, 160, 156, 154, 156, 158, 158, 160, 149, 148, 155, 154, 151, 144, 127, 116, 118, 120, 129, 127, 98, 94, 91, 91, 85, 83, 87, 80, 75, 74, 72, 70, 61, 61, 68, 62, 64, 73]},
+  {n:1, title:"Étape 1 — Calais → Arras", route:"Vendredi 25/09 · Les Attaques · Tournehem-sur-la-Hem · Lumbres · Bomy · Heuchin · Tincques · Savy-Berlette · Mont-Saint-Éloi — v4 du 19/09 (BRouter, 137,6 km)",
+   km:138, dplus:1130, min:1, max:183,
+   climbs:[[58.0,8.9,"Coyecques"],[52.0,8.8,"Avroult"],[60.6,8.4,"Coyecques"],[23.0,6.8,"Tournehem-sur-la-Hem"]],
+   el:[2,  3,  3,  2,  6,  2,  2,  1,  2,  1,  1,  1,  1,  2,  19,  24,  26,  39,  67,  90,  34,  47,  63,  97,  147,  179,  172,  125,  107,  77,  156,  108,  62,  51,  44,  51,  50,  103,  126,  72,  62,  62,  102,  137,  129,  123,  88,  104,  49,  100,  124,  131,  121,  92,  112,  118,  152,  181,  177,  180,  168,  166,  165,  153,  139,  87,  127,  140,  114,  170,  171,  166,  166,  149,  148,  157,  156,  157,  165,  162,  159,  144,  152,  133,  104,  114,  160,  164,  142,  145,  122,  139,  113,  99,  107,  91,  88,  102,  96,  83,  76,  77,  72,  85,  74,  62,  63,  58,  57,  67,  71]},
   {n:2, title:"Étape 2 — Arras → Ognes", route:"Samedi 26/09 · Bapaume · Villers-au-Flos · Rocquigny · Moislains · Hervilly · Saint-Simon · Cugny · vallée de l'Oise",
    km:113, dplus:930, min:41, max:177,
    climbs:[[49.0,7.4,"Buire-Courcelles"],[102.2,6.7,"Beaugies-sous-Bois"],[44.2,5.5,"Moislains"]],
    el:[73, 78, 85, 95, 95, 73, 81, 78, 76, 65, 75, 78, 90, 96, 95, 108, 116, 91, 99, 97, 110, 115, 124, 121, 131, 120, 129, 128, 122, 123, 129, 132, 132, 131, 146, 151, 148, 144, 125, 129, 93, 71, 95, 138, 137, 133, 106, 88, 121, 71, 72, 74, 76, 76, 96, 83, 86, 85, 114, 111, 109, 105, 79, 78, 105, 116, 107, 94, 97, 99, 97, 93, 96, 93, 80, 71, 69, 83, 71, 86, 75, 66, 68, 67, 71, 70, 74, 93, 107, 108, 103, 71, 98, 91, 107, 101, 98, 105, 88, 124, 177, 113, 86, 57, 53, 42, 43, 45, 42, 49, 54]},
-  {n:3, title:"Étape 3 — Ognes → Saint-Martin-sur-le-Pré", route:"Dimanche 27/09 · Chauny · Champs · Coucy-le-Château · Chemin des Dames · Vailly-sur-Aisne · Fismes · Montagne de Reims · Verzy · Ambonnay",
-   km:149, dplus:1414, min:42, max:287,
-   climbs:[[118.5,10.1,"Verzy"],[104.0,8.6,"Montchenot"],[82.8,7.0,"Treslon"],[59.6,6.4,"Longueval"]],
-   el:[54, 44, 43, 44, 53, 60, 63, 59, 53, 57, 49, 56, 57, 62, 63, 71, 72, 73, 84, 75, 84, 78, 58, 77, 85, 147, 179, 183, 167, 129, 79, 100, 57, 50, 51, 48, 50, 52, 60, 52, 63, 54, 69, 76, 151, 164, 149, 90, 65, 80, 92, 75, 90, 86, 88, 94, 111, 98, 92, 101, 115, 173, 183, 120, 102, 98, 102, 146, 129, 117, 115, 120, 146, 142, 152, 157, 164, 196, 191, 169, 147, 145, 159, 163, 198, 181, 179, 219, 286, 269, 208, 158, 129, 162, 134, 119, 113, 91, 86, 83, 75, 74, 75, 76, 75, 77, 77, 79, 79, 80, 82]}
+  {n:3, title:"Étape 3 — Ognes → Saint-Martin-sur-le-Pré", route:"Dimanche 27/09 · Chauny · Coucy-le-Château · Chemin des Dames · Vailly-sur-Aisne · Fismes · Ville-Dommange · Montagne de Reims · Verzy · Ambonnay — v3 du 19/09 (BRouter, 154,4 km)",
+   km:154, dplus:1310, min:43, max:286,
+   climbs:[[121.0,10.6,"Verzy"],[128.7,9.0,"Trépail"],[59.6,8.8,"Longueval"],[106.7,8.0,"Montchenot"],[96.2,8.0,"Ville-Dommange"],[83.8,6.7,"Treslon"]],
+   el:[55,  44,  43,  44,  57,  61,  62,  58,  56,  46,  48,  53,  49,  54,  64,  71,  73,  72,  89,  84,  85,  62,  75,  80,  132,  170,  181,  173,  143,  87,  97,  63,  50,  52,  49,  50,  53,  58,  52,  50,  52,  68,  76,  145,  175,  155,  131,  69,  82,  95,  84,  81,  94,  99,  90,  89,  111,  92,  97,  106,  133,  196,  142,  106,  107,  100,  142,  128,  120,  155,  148,  122,  147,  143,  147,  182,  169,  197,  194,  169,  152,  145,  163,  160,  205,  212,  188,  265,  278,  230,  179,  143,  161,  150,  126,  125,  101,  87,  91,  84,  76,  76,  76,  77,  78,  78,  78,  79,  80,  81,  86]}
 ];
 
 const NS="http://www.w3.org/2000/svg";

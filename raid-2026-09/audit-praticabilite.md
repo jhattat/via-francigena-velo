@@ -26,6 +26,8 @@ voiture doit contourner et retrouver Jay à la sortie.
 
 ## Étape 1 — Calais → Arras (Vendredi 25/09)
 
+> ⚠️ **Audit de la v3 (15/09).** La v4 du 19/09 (recalcul complet bikerouter.de, 137,6 km, +1 128 m) modifie le tracé aux km 2-4, 26-28, 90-95, 101-112 (Tincques · Savy-Berlette au lieu de Penin · Villers-Brûlin), 119-122 et 133-137. Les lignes D 77 / D 941 des km 90-112 ci-dessous sont donc à reprendre ; le reste (km 4-26, 28-90) est inchangé. Ré-audit Overpass à relancer depuis le Mac.
+
 ### 🔴 Routes principales (à éviter ou à assumer en connaissance de cause)
 - km 99,9 → 100,3 (0,4 km) : D 941 — limité à 80 km/h
 
@@ -73,6 +75,8 @@ voiture doit contourner et retrouver Jay à la sortie.
 - km 30,5 → 31,0 (0,6 km) : service — revêtement non renseigné
 
 ## Étape 3 — Ognes → Saint-Martin-sur-le-Pré (Dimanche 27/09)
+
+> ⚠️ **Audit de la v2 (15/09).** La v3 du 19/09 (recalcul complet bikerouter.de, 154,4 km, +1 308 m) modifie le tracé aux km 10-12, 15-19, 54-61, 77-80, 96-99, 104-105, 129 et 134-139. Les lignes D 937 / D 934 (Chauny → Coucy), D 386, D 26 et l'accès à la voie verte V52 sont à reprendre ; vérifier que le contournement de la D 937 par Champs a survécu au recalcul. Ré-audit Overpass à relancer depuis le Mac.
 
 ### 🔴 Routes principales (à éviter ou à assumer en connaissance de cause)
 - km 3,0 → 3,4 (0,3 km) : D 937 · Rue de la Chaussée — limité à 50 km/h
