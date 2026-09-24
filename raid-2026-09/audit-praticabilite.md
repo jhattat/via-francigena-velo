@@ -24,9 +24,9 @@ voiture doit contourner et retrouver Jay à la sortie.
 | 2 Arras → Ognes | 113 km | 82 % | 0,1 % (0,1 km) | 18,1 % (20,4 km) | 0,2 km | 0,2 km | 🟢 |
 | 3 Ognes → Saint-Martin-sur-le-Pré | 149 km | 44 % | 4,4 % (6,6 km) | 51,0 % (76,2 km) | 14,1 km | 0,1 km | 🟠 |
 
-## Étape 1 — Calais → Arras (Vendredi 25/09)
+## Étape 1 — Sangatte → Arras (Vendredi 25/09)
 
-> ⚠️ **Audit de la v3 (15/09).** La v4 du 19/09 (recalcul complet bikerouter.de, 137,6 km, +1 128 m) modifie le tracé aux km 2-4, 26-28, 90-95, 101-112 (Tincques · Savy-Berlette au lieu de Penin · Villers-Brûlin), 119-122 et 133-137 (l'entrée d'Arras a été retouchée une seconde fois le soir même : km 136-137). Les lignes D 77 / D 941 des km 90-112 ci-dessous sont donc à reprendre ; le reste (km 4-26, 28-90) est inchangé. Ré-audit Overpass à relancer depuis le Mac.
+> ⚠️ **Audit de la v3 (15/09, départ Calais).** La v5 du 24/09 (140,4 km, +1 123 m) part de **Sangatte** : les 14 premiers km sont nouveaux (rejoint l'ancien tracé aux Attaques) et tout le reste est décalé d'environ +2,8 km. Les v4/v5 modifient aussi, en km v3 : 26-28, 90-95, 101-112 (Tincques · Savy-Berlette au lieu de Penin · Villers-Brûlin), 119-122 et 133-137 (entrée d'Arras). Les lignes D 77 / D 941 des km 90-112 ci-dessous sont donc à reprendre ; le reste (km 4-26, 28-90) est inchangé. Ré-audit Overpass à relancer depuis le Mac.
 
 ### 🔴 Routes principales (à éviter ou à assumer en connaissance de cause)
 - km 99,9 → 100,3 (0,4 km) : D 941 — limité à 80 km/h
