@@ -76,7 +76,7 @@ voiture doit contourner et retrouver Jay à la sortie.
 
 ## Étape 3 — Ognes → Saint-Martin-sur-le-Pré (Dimanche 27/09)
 
-> ⚠️ **Audit de la v2 (15/09).** Les v3 (19/09) et v4 (24/09 : quatre points ajoutés pour supprimer les petits détours, 152,6 km, +1 257 m) modifient le tracé aux km 10-12, 15-19, 54-61, 76-80, 94-99, 104-105, 127-129 et 132-137. Les lignes D 937 / D 934 (Chauny → Coucy), D 386, D 26 et l'accès à la voie verte V52 sont à reprendre ; vérifier que le contournement de la D 937 par Champs a survécu au recalcul. Ré-audit Overpass à relancer depuis le Mac.
+> ⚠️ **Audit de la v2 (15/09).** Les v3 (19/09), v4 et v5 (24/09 : points ajoutés pour supprimer les petits détours puis ajuster Vailly et Sacy, 152,3 km, +1 248 m) modifient le tracé aux km 10-12, 15-19, 54-61, 76-80, 94-99, 104-105, 127-129 et 132-137. Les lignes D 937 / D 934 (Chauny → Coucy), D 386, D 26 et l'accès à la voie verte V52 sont à reprendre ; vérifier que le contournement de la D 937 par Champs a survécu au recalcul. Ré-audit Overpass à relancer depuis le Mac.
 
 ### 🔴 Routes principales (à éviter ou à assumer en connaissance de cause)
 - km 3,0 → 3,4 (0,3 km) : D 937 · Rue de la Chaussée — limité à 50 km/h
